@@ -1,0 +1,39 @@
+#include <stdio.h>
+
+void insertionSort(int *V, int n){
+    int i, j, chave;
+    for(i = 1; i < n; i++){
+        chave = V[i];
+        j = i;
+        while (j > 0 && chave < V[j - 1]){
+            V[j] = V[j - 1];
+            j--;
+        }
+        V[j] = chave;
+    }
+}
+
+void imprimirVetor(int v[], int n) {
+    printf("[ ");
+    for (int i = 0; i < n; i++) printf("%d ", v[i]);
+    printf("]\n");
+}
+
+int main() {
+    
+    int meuVetor[] = {52, 14, 6, 88, 32, 10, 4, 77, 21, 0};
+    int n = 10;
+
+    printf("--- Teste Insertion Sort ---\n");
+    
+    printf("Vetor original: ");
+    imprimirVetor(meuVetor, n);
+
+    // Executa a ordenação
+    insertionSort(meuVetor, n);
+
+    printf("Vetor ordenado: ");
+    imprimirVetor(meuVetor, n);
+
+    return 0;
+}
