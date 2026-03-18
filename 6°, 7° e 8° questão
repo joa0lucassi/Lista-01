@@ -1,0 +1,92 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+/*
+7° Questão
+
+Iteração i = 0
+Subvetor: i de 0 a 4 [64, 25, 12, 22, 11]
+Menor valor: 11, i = 4;
+Ação: Troca o valor do i=0 (64) com o i=4 (11);
+Vetor: [11, 25, 12, 22, 64]
+
+Iteração i = 1
+Subvetor: i de 1 a 4 [25, 12, 22, 64]
+Menor valor: 12, i = 2;
+Ação: Troca o valor do i=1 (25) com o i=2 (12);
+Vetor: [11, 12, 25, 22, 64]
+
+Iteração i = 2
+Subvetor: i de 2 a 4 [25, 22, 64]
+Menor valor: 22, i=3;
+Ação: Troca o valor do i=2 (25) com o i=3 (22);
+Vetor: [11, 12, 22, 25, 64]
+
+Iteração i = 3
+Subvetor: i de 3 a 4 [25, 64]
+Menor valor: 25, i=3;
+Ação: Como o menor valor já está em i=3;
+Vetor: [11, 12, 22, 25, 64]
+
+i = 0: [11, 25, 12, 22, 64]
+i = 1: [11, 12, 25, 22, 64]
+i = 2: [11, 12, 22, 25, 64]
+i = 3: [11, 12, 22, 25, 64]
+*/
+void imprimirVetor(int v[], int n) {
+    for (int i = 0; i < n; i++) printf("%d ", v[i]);
+    printf("\n");
+}
+
+//6° e 8°
+void selectionSort(int *V, int n, int ordem) {
+    int alvo;
+    int comparacoes = 0;
+    int trocas = 0;
+
+    for (int i = 0; i < n - 1; i++) {
+        alvo = i;
+        for (int j = i + 1; j < n; j++) {
+            comparacoes++;
+            if (ordem == 1) {
+                if (V[j] < V[alvo]) alvo = j;
+            } else if (ordem == -1) {
+                if (V[j] > V[alvo]) alvo = j;
+            }
+        }
+        if (alvo != i) {
+            int temp = V[i];
+            V[i] = V[alvo];
+            V[alvo] = temp;
+            trocas++;
+        }
+    }
+    printf("Estatisticas -> Comparacoes: %d | Trocas: %d\n", comparacoes, trocas);
+}
+
+int main() {
+    int n = 20;
+    // (i) Caso Ordenado
+    int vOrdenado[20] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20};
+    
+    // (ii) Caso Reverso
+    int vReverso[20] = {20, 19, 18, 17, 16, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1};
+    
+    // (iii) Caso Aleatório
+    int vAleatorio[20] = {15, 3, 19, 1, 17, 8, 12, 2, 20, 5, 11, 4, 18, 7, 14, 6, 10, 9, 16, 13};
+
+    printf("--- (i) TESTE: ORDENADO ---\n");
+    selectionSort(vOrdenado, n, 1);
+    imprimirVetor(vOrdenado, n);
+
+    printf("\n--- (ii) TESTE: REVERSO ---\n");
+    selectionSort(vReverso, n, 1);
+    imprimirVetor(vReverso, n);
+
+    printf("\n--- (iii) TESTE: ALEATORIO ---\n");
+    selectionSort(vAleatorio, n, 1);
+    imprimirVetor(vAleatorio, n);
+
+    return 0;
+}
