@@ -1,0 +1,71 @@
+#include <stdio.h>
+void imprimirVetor(int v[], int n){
+    if(n <= 0){
+        return;
+    }
+    
+    printf("[ ");
+    for (int i = 0; i < n; i++) printf("%d ", v[i]);
+    printf("]\n");
+}
+
+void bubbleSortOrdem(int v[], int n, int ordem) {
+    int early;
+    
+    if(n < 1){
+        printf("Vetor invalido!\n");
+        return;
+    }
+
+    for(int i = 0; i < n - 1; i++){
+        early = 0;
+        for(int j = 0; j < n - i - 1; j++){
+            int precisaTrocar = 0;
+            if (ordem == 1 && v[j] > v[j + 1]) precisaTrocar = 1;
+            else if (ordem == -1 && v[j] < v[j + 1]) precisaTrocar = 1;
+
+            if (precisaTrocar) {
+                int temp = v[j];
+                v[j] = v[j + 1];
+                v[j + 1] = temp;
+                early = 1;
+            }
+        }
+        if (!early) break;
+    }
+}
+int main() {
+    //(Vazio)
+    printf("1. Teste n=0:\n");
+    int v0[1] = {}; 
+    bubbleSortOrdem(v0, 0, 1);
+
+    //(Unitário)
+    printf("\n2. Teste n=1:\n");
+    int v1[] = {42};
+    printf("Original: "); imprimirVetor(v1, 1);
+    bubbleSortOrdem(v1, 1, 1);
+    printf("Ordenado: "); imprimirVetor(v1, 1);
+
+    //(Números Repetidos)
+    printf("\n3. Teste com Repetidos:\n");
+    int vRep[] = {5, 2, 5, 8, 2, 1};
+    int nRep = 6;
+    printf("Original: "); imprimirVetor(vRep, nRep);
+    bubbleSortOrdem(vRep, nRep, 1);
+    printf("Crescente: "); imprimirVetor(vRep, nRep);
+
+    // (positivo e negativo)
+    printf("\n4. Teste Mistos (Pos/Neg):\n");
+    int vMist[] = {-5, 10, 0, -15, 3, -1};
+    int nMist = 6;
+    printf("Original: "); imprimirVetor(vMist, nMist);
+    
+    bubbleSortOrdem(vMist, nMist, 1); // Teste Crescente
+    printf("Crescente: "); imprimirVetor(vMist, nMist);
+    
+    bubbleSortOrdem(vMist, nMist, -1); // Teste Decrescente
+    printf("Decrescente: "); imprimirVetor(vMist, nMist);
+
+    return 0;
+}
