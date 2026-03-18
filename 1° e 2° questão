@@ -1,29 +1,20 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void imprimirVetor(int v[], int n)
-{
+void imprimirVetor(int v[], int n){
     printf("[ ");
-    for (int i = 0; i < n; i++)
-    {
-        printf("%d ", v[i]);
-    }
+    for (int i = 0; i < n; i++) printf("%d ", v[i]);
     printf("]\n");
 }
 
-// 1° e 2° Questão
-void Bubble_sort(int V[], int n)
-{
+void Bubble_sort(int V[], int n){
     int trocas = 0;
     int comparacoes = 0;
 
-    for (int i = 0; i < n - 1; i++)
-    {
-        for (int j = 0; j < n - i - 1; j++)
-        {
+    for (int i = 0; i < n - 1; i++){
+        for (int j = 0; j < n - i - 1; j++){
             comparacoes++;
-            if (V[j] > V[j + 1])
-            {
+            if (V[j] > V[j + 1]){
                 int temp = V[j];
                 V[j] = V[j + 1];
                 V[j + 1] = temp;
@@ -34,4 +25,20 @@ void Bubble_sort(int V[], int n)
     printf("Comparacoes: %d | Trocas: %d\n", comparacoes, trocas);
 }
 
+int main() {
+    
+    int meuVetor[] = {45, 12, 89, 5, 23, 1};
+    int n = 6;
+
+    printf("--- Teste Bubble Sort ---\n");
+
+    printf("Vetor original: ");
+    imprimirVetor(meuVetor, n);
+
+    Bubble_sort(meuVetor, n);
+
+    printf("Vetor ordenado: ");
+    imprimirVetor(meuVetor, n);
+
+    return 0;
 }
